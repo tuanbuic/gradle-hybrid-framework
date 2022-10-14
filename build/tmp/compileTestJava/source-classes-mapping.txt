@@ -1,0 +1,70 @@
+testcases/user/Level17_Custom_Close_Driver.java
+ testcases.user.Level17_Custom_Close_Driver
+testcases/user/Level16_Shared_Data_Cookie.java
+ testcases.user.Level16_Shared_Data_Cookie
+testcases/user/Level15_Attach_Screenshot.java
+ testcases.user.Level15_Attach_Screenshot
+testcases/user/Level14_LOG_ReportNG.java
+ testcases.user.Level14_LOG_ReportNG
+testcases/user/Level2_Apply_BasePage_3.java
+ testcases.user.Level2_Apply_BasePage_3
+testcases/jQuery/Level11_UploadFile.java
+ testcases.jQuery.Level11_UploadFile
+testcases/user/Level3_Page_Objects_02_Login.java
+ testcases.user.Level3_Page_Objects_02_Login
+testcases/common/Common01_Register_Account.java
+ testcases.common.Common01_Register_Account
+testcases/user/Level5_Page_Factory.java
+ testcases.user.Level5_Page_Factory
+data/UserData.java
+ data.UserData
+testcases/user/Level18_Pattern_Object.java
+ testcases.user.Level18_Pattern_Object
+testcases/user/Level3_Apply_POM.java
+ testcases.user.Level3_Apply_POM
+testcases/user/Level13_Element_Undisplayed.java
+ testcases.user.Level13_Element_Undisplayed
+testcases/user/Level7_Switch_Page.java
+ testcases.user.Level7_Switch_Page
+testcases/user/Level2_Apply_BasePage_1.java
+ testcases.user.Level2_Apply_BasePage_1
+testcases/user/Level15_Extent_Report_V3.java
+ testcases.user.Level15_Extent_Report_V3
+testcases/user/Level8_Switch_Role.java
+ testcases.user.Level8_Switch_Role
+testcases/user/Level16_Shared_Data.java
+ testcases.user.Level16_Shared_Data
+testcases/common/Common01_Register_Cookie.java
+ testcases.common.Common01_Register_Cookie
+testcases/sort/Level19_Asc_Desc.java
+ testcases.sort.Level19_Asc_Desc
+testcases/post/POST_01_Create_Update_Delete_Search.java
+ testcases.post.POST_01_Create_Update_Delete_Search
+testcases/user/Level20_Internal_Data.java
+ testcases.user.Level20_Internal_Data
+testcases/user/Level20_External_Data.java
+ testcases.user.Level20_External_Data
+testcases/user/Level4_Multiple_Browser.java
+ testcases.user.Level4_Multiple_Browser
+testcases/user/Level15_Allure.java
+ testcases.user.Level15_Allure
+testcases/user/Level1_User_DRY.java
+ testcases.user.Level1_User_DRY
+testcases/user/Level12_assert.java
+ testcases.user.Level12_assert
+testcases/user/Level2_Apply_BasePage_2.java
+ testcases.user.Level2_Apply_BasePage_2
+testcases/jQuery/Level10_DataGrid_DataTable.java
+ testcases.jQuery.Level10_DataGrid_DataTable
+testcases/user/Level15_Extent_Report.java
+ testcases.user.Level15_Extent_Report
+testcases/user/Level20_Fake_Data.java
+ testcases.user.Level20_Fake_Data
+testcases/user/Level6_Page_Generator_Manager.java
+ testcases.user.Level6_Page_Generator_Manager
+testcases/user/Level9_Dynamic_Locator.java
+ testcases.user.Level9_Dynamic_Locator
+testcases/user/Level15_Extent_Report_V5.java
+ testcases.user.Level15_Extent_Report_V5
+data/UserDataMapper.java
+ data.UserDataMapper

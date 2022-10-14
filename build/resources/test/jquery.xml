@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="jQuery">
+    <parameter name="url" value="https://facebook.com"></parameter>
+<!--    <test name="Run on firefox">-->
+<!--        <parameter name="browser" value="firefox"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="testcases.com.nopcommerce.user.Level4_Multiple_Browser"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="Run on Chrome">
+        <parameter name="browser" value="chrome"></parameter>
+        <classes>
+            <class name="javaBasic.Topic_16_Assert"/>
+        </classes>
+    </test>
+
+<!--    <test name="Run on Edge">-->
+<!--        <parameter name="browser" value="edge"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="testcases.com.nopcommerce.user.Level4_Multiple_Browser"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+</suite>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="NopCommerce">
+    <listeners>
+        <listener class-name="listenerConfig.MethodListener"></listener>
+        <listener class-name="listenerConfig.ExtentTestListener"></listener>
+        <listener class-name="listenerConfig.AllureTestListener"></listener>
+    </listeners>
+    <parameter name="urlAdmin" value="https://automationfc.wordpress.com/wp-admin"></parameter>
+    <parameter name="urlUser" value="https://automationfc.wordpress.com"></parameter>
+    <test name="Run on Chrome">
+        <parameter name="browser" value="chrome"></parameter>
+<!--        <classes>-->
+<!--            <class name="testcases.com.nopcommerce.post.POST_01_Create_Update_Delete_Search"/>-->
+<!--        </classes>-->
+        <packages>
+            <package name="testcases.com.post"></package>
+        </packages>
+    </test>
+</suite>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite parallel="classes" name="NopCommerce">
+    <listeners>
+        <listener class-name="actions.listenerConfig.MethodListener"></listener>
+        <listener class-name="actions.listenerConfig.AllureTestListener"></listener>
+    </listeners>
+    <parameter name="appUrl" value="https://www.saucedemo.com/"></parameter>
+
+    <test name="Run on Chrome">
+        <parameter name="browser" value="chrome"></parameter>
+        <classes>
+            <class name="testcases.com.saucelab.sort.Level19_Asc_Desc"/>
+        </classes>
+    </test>
+</suite>
