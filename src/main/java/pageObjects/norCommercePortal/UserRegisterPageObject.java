@@ -5,7 +5,6 @@ import common.BasePage;
 import common.PageGeneratorManager;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
-import pageUIs.Test;
 import pageUIs.norCommerceUser.RegisterPageUI;
 
 public class UserRegisterPageObject extends BasePage {
@@ -16,7 +15,7 @@ public class UserRegisterPageObject extends BasePage {
     }
     @Step("click on register button")
     public void clickOnRegisterButton() {
-        waitForElementClickable(driver, Test.REGISTER_BUTTON);
+        waitForElementClickable(driver, RegisterPageUI.REGISTER_BUTTON);
         clickToElement(driver, RegisterPageUI.REGISTER_BUTTON);
     }
 

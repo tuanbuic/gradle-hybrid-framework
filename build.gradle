@@ -69,7 +69,7 @@ dependencies {
 
     aspectj group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.8'
 
-    // https://mvnrepository.com/artifact/org.aeonbits.owner/owner
+    // https://mvnrepository.com/artifact/org.aeonbits.owner/owner/test/process/restart/
     compile group: 'org.aeonbits.owner', name: 'owner', version: '1.0.12'
 
 }
@@ -103,5 +103,10 @@ task smokeTest(type: Test) {
     testLogging {
         showStandardStreams = true
     }
+
+    tasks.withType(Test){
+        systemProperty 'envi', System.getProperty('envi', 'envi')
+    }
+
     reports.html.setDestination(file("$projectDir/gradleSmoke-output"))
 }

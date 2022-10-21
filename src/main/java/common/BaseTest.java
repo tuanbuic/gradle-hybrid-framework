@@ -73,12 +73,12 @@ public class BaseTest {
         return driver;
     }
 
-    protected WebDriver getBrowserDriver(String browserName, String environmentName) throws BrowserNotSupport {
+    protected WebDriver getBrowserDriver(String browserName, String url) throws BrowserNotSupport {
         BrowserList browser = BrowserList.valueOf(browserName.toUpperCase());
         if (browser == BrowserList.CHROME) {
-            File google = new File(GlobalConstants.PROJECT_PATH +"\\browserDrivers\\google-trans.crx");
+//            File google = new File(GlobalConstants.PROJECT_PATH +"\\browserDrivers\\google-trans.crx");
             ChromeOptions options = new ChromeOptions();
-            options.addExtensions(google);
+//            options.addExtensions(google);
             driver = WebDriverManager.chromedriver().capabilities(options).create();
         } else if (browser == BrowserList.H_CHROME) {
             ChromeOptions options = new ChromeOptions();
@@ -98,9 +98,12 @@ public class BaseTest {
             throw new BrowserNotSupport(browserName);
         }
         driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
-        driver.get(getEnvironmentURL(environmentName));
+        driver.get(url);
         return driver;
     }
+
+
+
 
     protected String getEnvironmentURL(String environmentName) {
         String url = null;
