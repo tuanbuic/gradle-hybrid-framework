@@ -50,6 +50,7 @@ pageUIs/norCommerceAdmin/AdminDashboardPageUI.java
  pageUIs.norCommerceAdmin.AdminDashboardPageUI
 common/BaseTest.java
  common.BaseTest
+ common.BaseTest$1
 pageObjects/saucelab/LoginPageObject.java
  pageObjects.saucelab.LoginPageObject
 pageUIs/saucelab/LoginPageUI.java
@@ -94,6 +95,8 @@ pageUIs/norCommerceAdmin/AdminLoginPageUI.java
  pageUIs.norCommerceAdmin.AdminLoginPageUI
 pageObjects/jQuery/PageGeneratorManager.java
  pageObjects.jQuery.PageGeneratorManager
+ultilities/Environment.java
+ ultilities.Environment
 pageObjects/saucelab/PageGeneratorManager.java
  pageObjects.saucelab.PageGeneratorManager
 reportConfig/ReportNG.java

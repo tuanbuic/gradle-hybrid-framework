@@ -46,6 +46,8 @@ testcases/user/Level20_External_Data.java
  testcases.user.Level20_External_Data
 testcases/user/Level4_Multiple_Browser.java
  testcases.user.Level4_Multiple_Browser
+testcases/user/Level22_Multiple_Environment.java
+ testcases.user.Level22_Multiple_Environment
 testcases/user/Level15_Allure.java
  testcases.user.Level15_Allure
 testcases/user/Level1_User_DRY.java

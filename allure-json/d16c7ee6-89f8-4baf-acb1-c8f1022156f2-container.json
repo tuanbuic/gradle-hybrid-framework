@@ -1,1 +1,0 @@
-{"uuid":"d16c7ee6-89f8-4baf-acb1-c8f1022156f2","name":"testcases.user.Level20_External_Data","children":["ae410079-2997-47a8-b0c3-36cb18498ec3"],"befores":[],"afters":[{"name":"afterClass","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1665423636595,"stop":1665423637360}],"start":1665423619812,"stop":1665423637368}

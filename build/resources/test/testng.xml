@@ -19,7 +19,7 @@
     <test name="Run on Chrome">
         <parameter name="browser" value="chrome"></parameter>
         <classes>
-            <class name="testcases.user.Level20_External_Data"/>
+            <class name="testcases.user.Level22_Multiple_Environment"/>
         </classes>
     </test>
 
