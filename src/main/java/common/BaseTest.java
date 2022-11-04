@@ -4,16 +4,22 @@ import exception.BrowserNotSupport;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -68,6 +74,57 @@ public class BaseTest {
         } else {
             throw new BrowserNotSupport(browserName);
         }
+        driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        return driver;
+    }
+
+    protected WebDriver getBrowserDriver(String browserName, String osName, String ipAddress, String portNumber) throws BrowserNotSupport, MalformedURLException {
+        BrowserList browser = BrowserList.valueOf(browserName.toUpperCase());
+        DesiredCapabilities capability = null;
+        Platform platform = null;
+
+        if (osName.contains("windows")) {
+            platform = Platform.WINDOWS;
+        } else {
+            platform = Platform.MAC;
+        }
+        if (browser == BrowserList.CHROME) {
+            WebDriverManager.chromedriver().setup();
+            capability = DesiredCapabilities.chrome();
+            capability.setBrowserName("chrome");
+            capability.setPlatform(platform);
+            ChromeOptions options = new ChromeOptions();
+            options.merge(capability);
+        } else if (browser == BrowserList.H_CHROME) {
+            WebDriverManager.chromedriver().setup();
+            capability = DesiredCapabilities.chrome();
+            capability.setBrowserName("chrome");
+            capability.setPlatform(platform);
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("-headless");
+            options.addArguments("window-size=1920x1080");
+            options.merge(capability);
+        } else if (browser == BrowserList.FIREFOX) {
+            WebDriverManager.firefoxdriver().setup();
+            capability = DesiredCapabilities.firefox();
+            capability.setBrowserName("chrome");
+            capability.setPlatform(platform);
+            FirefoxOptions options = new FirefoxOptions();
+            options.merge(capability);
+        } else if (browser == BrowserList.H_FIREFOX) {
+            WebDriverManager.firefoxdriver().setup();
+            capability = DesiredCapabilities.firefox();
+            capability.setBrowserName("chrome");
+            capability.setPlatform(platform);
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("-headless");
+            options.addArguments("window-size=1920x1080");
+            options.merge(capability);
+        } else {
+            throw new BrowserNotSupport(browserName);
+        }
+        driver = new RemoteWebDriver(new URL(String.format("http://%s:%s/wd/hub", ipAddress, portNumber)), capability);
         driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         return driver;
