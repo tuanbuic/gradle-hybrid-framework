@@ -130,6 +130,23 @@ public class BaseTest {
         return driver;
     }
 
+    protected WebDriver getBrowserDriver(String osName, String osVersion, String browserName) throws BrowserNotSupport, MalformedURLException {
+
+        DesiredCapabilities capability = new DesiredCapabilities();
+        capability.setCapability("os", osName);
+        capability.setCapability("os_version", osVersion);
+        capability.setCapability("browser", browserName);
+        capability.setCapability("browser_version", "latest");
+        capability.setCapability("browserstack.debug", "true");
+        capability.setCapability("name", "Run on " + osName + " and" + browserName);
+
+        driver = new RemoteWebDriver(new URL(GlobalConstants.BROWSER_STACK_URL), capability);
+        driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        return driver;
+    }
+
+
     protected WebDriver getBrowserDriver(String browserName, String url) throws BrowserNotSupport {
         BrowserList browser = BrowserList.valueOf(browserName.toUpperCase());
         if (browser == BrowserList.CHROME) {
@@ -160,12 +177,10 @@ public class BaseTest {
     }
 
 
-
-
     protected String getEnvironmentURL(String environmentName) {
         String url = null;
         EnvironmentList environment = valueOf(environmentName.toUpperCase());
-        switch (environment){
+        switch (environment) {
             case DEV:
                 url = "https://demo.nopcommerce.com/";
                 break;
@@ -300,12 +315,13 @@ public class BaseTest {
             }
         }
     }
-    protected void showBrowserConsoleLogs(WebDriver driver){
-        if(driver.toString().contains("chrome")){
+
+    protected void showBrowserConsoleLogs(WebDriver driver) {
+        if (driver.toString().contains("chrome")) {
             LogEntries logs = driver.manage().logs().get("browser");
             List<LogEntry> logList = logs.getAll();
-            for(LogEntry logging :logList){
-                log.info("------" + logging.getLevel().toString() + "------------- \n" +logging.getMessage());
+            for (LogEntry logging : logList) {
+                log.info("------" + logging.getLevel().toString() + "------------- \n" + logging.getMessage());
             }
         }
     }
