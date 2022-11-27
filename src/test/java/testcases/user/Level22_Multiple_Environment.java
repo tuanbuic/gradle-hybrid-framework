@@ -26,17 +26,16 @@ public class Level22_Multiple_Environment extends BaseTest {
     private UserDataMapper userData;
     private String emailAddress, password;
     Environment env;
+    @Parameters({"envName", "servername", "browser", "ipAddress", "portNumber", "osName", "osVersion"})
     @BeforeClass
-    @Parameters({"browser"})
-    public void Register(String browserName) throws BrowserNotSupport {
+    public void beforeClass(@Optional("Local") String envName, @Optional("chrome") String browserName, @Optional("dev") String serverName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber, @Optional("Window") String osName, @Optional("10") String osVersion) throws Exception {
+        driver = getBrowserDriver(envName, browserName, serverName, ipAddress, portNumber, osName, osVersion);
         System.out.println(System.getProperty("envi"));
         ConfigFactory.setProperty("env",System.getProperty("envi"));
         env = ConfigFactory.create(Environment.class);
         System.out.println(env.appUrl());
         userData = UserDataMapper.getUserData();
         emailAddress = userData.getEmailAddress();
-
-        driver = getBrowserDriver(browserName,env.appUrl());
 
         homePage = PageGeneratorManager.getUserHomePage(driver);
 

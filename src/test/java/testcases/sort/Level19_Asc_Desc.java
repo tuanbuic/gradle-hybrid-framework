@@ -5,10 +5,7 @@ import common.BaseTest;
 import exception.BrowserNotSupport;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageObjects.saucelab.LoginPageObject;
 import pageObjects.saucelab.PageGeneratorManager;
 import pageObjects.saucelab.ProductPageObject;
@@ -22,11 +19,10 @@ public class Level19_Asc_Desc extends BaseTest {
     private ProductPageObject productPage;
 
 
+    @Parameters({"envName", "servername", "browser", "ipAddress", "portNumber", "osName", "osVersion"})
     @BeforeClass
-    @Parameters({"browser", "appUrl"})
-    public void login(String browserName, String appUrl) throws BrowserNotSupport {
-
-        driver = getBrowserDriver(browserName, appUrl);
+    public void beforeClass(@Optional("Local") String envName, @Optional("chrome") String browserName, @Optional("dev") String serverName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber, @Optional("Window") String osName, @Optional("10") String osVersion) throws Exception {
+        driver = getBrowserDriver(envName, browserName, serverName, ipAddress, portNumber, osName, osVersion);
         loginPage = PageGeneratorManager.getUserLoginPage(driver);
         loginPage.inputEmail("standard_user");
         loginPage.inputPassword("secret_sauce");

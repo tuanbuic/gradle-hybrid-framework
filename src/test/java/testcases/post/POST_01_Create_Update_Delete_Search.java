@@ -3,10 +3,7 @@ package testcases.post;
 import common.BaseTest;
 import exception.BrowserNotSupport;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageObjects.wordpress.admin.*;
 
 public class POST_01_Create_Update_Delete_Search extends BaseTest {
@@ -22,10 +19,10 @@ public class POST_01_Create_Update_Delete_Search extends BaseTest {
     String postBodyValue="";
 
 
-    @BeforeTest
-    @Parameters({"browser", "urlAdmin"})
-    public void Register(String browserName, String urlAdmin) throws BrowserNotSupport {
-        driver = getBrowserDriver(browserName, urlAdmin);
+    @Parameters({"envName", "servername", "browser", "ipAddress", "portNumber", "osName", "osVersion"})
+    @BeforeClass
+    public void beforeClass(@Optional("Local") String envName, @Optional("chrome") String browserName, @Optional("dev") String serverName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber, @Optional("Window") String osName, @Optional("10") String osVersion) throws Exception {
+        driver = getBrowserDriver(envName, browserName, serverName, ipAddress, portNumber, osName, osVersion);
         loginPage = PageGeneratorManager.getLoginPage(driver);
         loginPage.enterUsernameTextbox(adminUsername);
         loginPage.enterPasswordTextbox(adminPassword);

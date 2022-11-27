@@ -54,7 +54,7 @@ public class BaseTest {
         return emailprefix + generateFakeNumber() + "@" + webmail;
     }
 
-    protected WebDriver getBrowserDriver(String browserName, String appUrl, String envName,  String ipAddress, String portNumber,String osName,String osVersion) throws Exception {
+    protected WebDriver getBrowserDriver(String envName,String browserName, String serverName,  String ipAddress, String portNumber,String osName,String osVersion) throws Exception {
         switch (envName) {
             case "grid":
                 driver = new GridFactory(ipAddress,portNumber,browserName).createDriver();
@@ -69,107 +69,11 @@ public class BaseTest {
                 driver = new LocalFactory(browserName).createDriver();
                 break;
         }
-        return driver;
-    }
-
-
-    protected WebDriver getBrowserDriver(String browserName, String osName, String ipAddress, String portNumber) throws BrowserNotSupport, MalformedURLException {
-        BrowserList browser = BrowserList.valueOf(browserName.toUpperCase());
-        DesiredCapabilities capability = null;
-        Platform platform = null;
-
-        if (osName.contains("windows")) {
-            platform = Platform.WINDOWS;
-        } else {
-            platform = Platform.MAC;
-        }
-        if (browser == BrowserList.CHROME) {
-            WebDriverManager.chromedriver().setup();
-            capability = DesiredCapabilities.chrome();
-            capability.setBrowserName("chrome");
-            capability.setPlatform(platform);
-            ChromeOptions options = new ChromeOptions();
-            options.merge(capability);
-        } else if (browser == BrowserList.H_CHROME) {
-            WebDriverManager.chromedriver().setup();
-            capability = DesiredCapabilities.chrome();
-            capability.setBrowserName("chrome");
-            capability.setPlatform(platform);
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("-headless");
-            options.addArguments("window-size=1920x1080");
-            options.merge(capability);
-        } else if (browser == BrowserList.FIREFOX) {
-            WebDriverManager.firefoxdriver().setup();
-            capability = DesiredCapabilities.firefox();
-            capability.setBrowserName("chrome");
-            capability.setPlatform(platform);
-            FirefoxOptions options = new FirefoxOptions();
-            options.merge(capability);
-        } else if (browser == BrowserList.H_FIREFOX) {
-            WebDriverManager.firefoxdriver().setup();
-            capability = DesiredCapabilities.firefox();
-            capability.setBrowserName("chrome");
-            capability.setPlatform(platform);
-            FirefoxOptions options = new FirefoxOptions();
-            options.addArguments("-headless");
-            options.addArguments("window-size=1920x1080");
-            options.merge(capability);
-        } else {
-            throw new BrowserNotSupport(browserName);
-        }
-        driver = new RemoteWebDriver(new URL(String.format("http://%s:%s/wd/hub", ipAddress, portNumber)), capability);
         driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+        driver.get(getEnvironmentURL(serverName));
         return driver;
     }
-
-    protected WebDriver getBrowserDriver(String osName, String osVersion, String browserName) throws BrowserNotSupport, MalformedURLException {
-
-        DesiredCapabilities capability = new DesiredCapabilities();
-        capability.setCapability("os", osName);
-        capability.setCapability("os_version", osVersion);
-        capability.setCapability("browser", browserName);
-        capability.setCapability("browser_version", "latest");
-        capability.setCapability("browserstack.debug", "true");
-        capability.setCapability("name", "Run on " + osName + " and" + browserName);
-
-        driver = new RemoteWebDriver(new URL(GlobalConstants.BROWSER_STACK_URL), capability);
-        driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        return driver;
-    }
-
-
-    protected WebDriver getBrowserDriver(String browserName, String url) throws BrowserNotSupport {
-        BrowserList browser = BrowserList.valueOf(browserName.toUpperCase());
-        if (browser == BrowserList.CHROME) {
-//            File google = new File(GlobalConstants.PROJECT_PATH +"\\browserDrivers\\google-trans.crx");
-            ChromeOptions options = new ChromeOptions();
-//            options.addExtensions(google);
-            driver = WebDriverManager.chromedriver().capabilities(options).create();
-        } else if (browser == BrowserList.H_CHROME) {
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("-headless");
-            options.addArguments("window-size=1920x1080");
-            driver = WebDriverManager.chromedriver().capabilities(options).create();
-        } else if (browser == BrowserList.FIREFOX) {
-            driver = WebDriverManager.firefoxdriver().create();
-        } else if (browser == BrowserList.H_FIREFOX) {
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("-headless");
-            options.addArguments("window-size=1920x1080");
-            driver = WebDriverManager.firefoxdriver().capabilities(options).create();
-        } else if (browser == BrowserList.EDGE) {
-            driver = WebDriverManager.edgedriver().create();
-        } else {
-            throw new BrowserNotSupport(browserName);
-        }
-        driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
-        driver.get(url);
-        return driver;
-    }
-
 
     protected String getEnvironmentURL(String environmentName) {
         String url = null;

@@ -4,10 +4,7 @@ import common.BaseTest;
 import exception.BrowserNotSupport;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageObjects.norCommercePortal.UserHomePageObject;
 import pageObjects.norCommercePortal.UserLoginPageObject;
 import pageObjects.norCommercePortal.UserRegisterPageObject;
@@ -26,15 +23,15 @@ public class Level4_Multiple_Browser extends BaseTest {
     private String lastName;
     private String password;
 
-    @Parameters("browser")
+    @Parameters({"envName", "servername", "browser", "ipAddress", "portNumber", "osName", "osVersion"})
     @BeforeClass
-    public void beforeClass(String browserName) throws BrowserNotSupport {
-        driver= getBrowserDriver(browserName);
+    public void beforeClass(@Optional("Local") String envName, @Optional("chrome") String browserName, @Optional("dev") String serverName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber, @Optional("Window") String osName, @Optional("10") String osVersion) throws Exception {
+        driver = getBrowserDriver(envName, browserName, serverName, ipAddress, portNumber, osName, osVersion);
 
         emailAddress = generatefakeEmailAddress("kevinbui", "yopmail.com");
-        firstName= "Automation";
-        lastName="FC";
-        password="123456";
+        firstName = "Automation";
+        lastName = "FC";
+        password = "123456";
         registerPage = new UserRegisterPageObject(driver);
         homePage = new UserHomePageObject(driver);
         loginPage = new UserLoginPageObject(driver);
@@ -58,46 +55,51 @@ public class Level4_Multiple_Browser extends BaseTest {
     public void TC_01_Login_Empty_Data() {
         homePage.clickOnLoginButton();
         loginPage.clickOnLoginButton();
-        Assert.assertEquals(loginPage.getEmailErrorMessage(),"Please enter your email");
+        Assert.assertEquals(loginPage.getEmailErrorMessage(), "Please enter your email");
 
 
     }
+
     @Test
     public void TC_02_Login_Invalid_Data() {
-        String invalidEmail ="Abcde";
+        String invalidEmail = "Abcde";
         homePage.clickOnLoginButton();
         loginPage.inputEmail(invalidEmail);
         loginPage.inputPassword(password);
     }
+
     @Test
     public void TC_03_Login_NotRegistered_Data() {
-        String notRegistered ="nonexistemail@gmail.com";
+        String notRegistered = "nonexistemail@gmail.com";
         homePage.clickOnLoginButton();
         loginPage.inputEmail(notRegistered);
         loginPage.inputPassword(password);
         loginPage.clickOnLoginButton();
-        Assert.assertEquals(loginPage.getNotRegisteredEmailErrorMessage(),"Login was unsuccessful. Please correct the errors and try again.\nNo customer account found");
+        Assert.assertEquals(loginPage.getNotRegisteredEmailErrorMessage(), "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found");
 
     }
+
     @Test
     public void TC_04_Login_Existing_Email_Empty_Password() {
         homePage.clickOnLoginButton();
         loginPage.inputEmail(emailAddress);
         loginPage.clickOnLoginButton();
-        Assert.assertEquals(loginPage.getNotRegisteredEmailErrorMessage(),"Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
+        Assert.assertEquals(loginPage.getNotRegisteredEmailErrorMessage(), "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
 
 
     }
+
     @Test
     public void TC_05_Login_Existing_Email_Incorrect_Password() {
-        String wrongPassword="123123";
+        String wrongPassword = "123123";
         homePage.clickOnLoginButton();
         loginPage.inputEmail(emailAddress);
         loginPage.inputPassword(wrongPassword);
         loginPage.clickOnLoginButton();
-        Assert.assertEquals(loginPage.getNotRegisteredEmailErrorMessage(),"Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
+        Assert.assertEquals(loginPage.getNotRegisteredEmailErrorMessage(), "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
 
     }
+
     @Test
     public void TC_06_Login_successfully_Data() {
         homePage.clickOnLoginButton();

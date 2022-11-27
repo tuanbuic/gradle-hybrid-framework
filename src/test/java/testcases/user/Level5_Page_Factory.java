@@ -5,10 +5,7 @@ import common.BaseTest;
 import exception.BrowserNotSupport;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -24,10 +21,10 @@ public class Level5_Page_Factory extends BaseTest {
     private String lastName;
     private String password;
 
-    @Parameters("browser")
+    @Parameters({"envName", "servername", "browser", "ipAddress", "portNumber", "osName", "osVersion"})
     @BeforeClass
-    public void beforeClass(String browserName) throws BrowserNotSupport {
-        driver= getBrowserDriver(browserName);
+    public void beforeClass(@Optional("Local") String envName, @Optional("chrome") String browserName, @Optional("dev") String serverName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber, @Optional("Window") String osName, @Optional("10") String osVersion) throws Exception {
+        driver = getBrowserDriver(envName, browserName, serverName, ipAddress, portNumber, osName, osVersion);
 
         emailAddress = generatefakeEmailAddress("kevinbui", "yopmail.com");
         firstName= "Automation";

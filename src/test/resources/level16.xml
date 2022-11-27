@@ -2,9 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="NopCommerce">
     <listeners>
-        <listener class-name="actions.listenerConfig.MethodListener"></listener>
+        <listener class-name="listenerConfig.MethodListener"></listener>
 <!--        <listener class-name="actions.listenerConfig.ExtentTestListener"></listener>-->
-        <listener class-name="actions.listenerConfig.AllureTestListener"></listener>
+        <listener class-name="listenerConfig.AllureTestListener"></listener>
 
         <!--        <listener class-name="actions.reportConfig.ReportNG"></listener>-->
         <!--        <listener class-name="actions.reportConfig.ExtentReportListenerV2"></listener>-->
@@ -13,7 +13,8 @@
         <!--        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener>-->
         <!--        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener>-->
     </listeners>
-    <parameter name="environment" value="dev"></parameter>
+    <parameter name="envName" value="local"></parameter>
+    <parameter name="serverName" value="dev"></parameter>
     <!--    <test name="Run on firefox">-->
     <!--        <parameter name="browser" value="firefox"></parameter>-->
     <!--        <classes>-->
@@ -22,10 +23,10 @@
     <!--    </test>-->
 
     <test name="Run on Chrome">
-        <parameter name="browser" value="chrome"></parameter>
+<!--        <parameter name="browser" value="chrome"></parameter>-->
         <classes>
 <!--            <class name="testcases.com.common.Common01_Register_Cookie"/>-->
-            <class name="testcases.com.nopcommerce.user.Level17_Custom_Close_Driver"/>
+            <class name="testcases.user.Level16_Shared_Data"/>
         </classes>
     </test>
 

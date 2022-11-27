@@ -5,10 +5,7 @@ import common.PageGeneratorManager;
 import exception.BrowserNotSupport;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageObjects.norCommercePortal.UserHomePageObject;
 import pageObjects.norCommercePortal.UserRegisterPageObject;
 
@@ -30,8 +27,6 @@ public class Level18_Pattern_Object extends BaseTest {
         firstName = "Automation";
         lastName = "FC";
         password = "123456";
-        driver = getBrowserDriver(browserName);
-        driver.get(getEnvironmentURL(environment));
         homePage = PageGeneratorManager.getUserHomePage(driver);
         registerPage = homePage.clickOnSignupButton();
         registerPage.inputToTextBoxById(driver, "FirstName",firstName);

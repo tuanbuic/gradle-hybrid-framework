@@ -5,10 +5,7 @@ import common.PageGeneratorManager;
 import exception.BrowserNotSupport;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageObjects.norCommercePortal.UserHomePageObject;
 import pageObjects.norCommercePortal.UserRegisterPageObject;
 import ultilities.DataHelper;
@@ -23,14 +20,13 @@ public class Level20_Fake_Data extends BaseTest {
     private DataHelper dataHelper;
     private String emailAddress, password;
 
-    @BeforeTest
-    @Parameters({"browser", "environment"})
-    public void Register(String browserName, String environment) throws BrowserNotSupport {
+    @Parameters({"envName", "servername", "browser", "ipAddress", "portNumber", "osName", "osVersion"})
+    @BeforeClass
+    public void beforeClass(@Optional("Local") String envName, @Optional("chrome") String browserName, @Optional("dev") String serverName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber, @Optional("Window") String osName, @Optional("10") String osVersion) throws Exception {
+        driver = getBrowserDriver(envName, browserName, serverName, ipAddress, portNumber, osName, osVersion);
         dataHelper = DataHelper.getDataHelper();
         emailAddress = dataHelper.getEmailAddress();
         password = dataHelper.getPassword();
-        driver = getBrowserDriver(browserName);
-        driver.get(getEnvironmentURL(environment));
         homePage = PageGeneratorManager.getUserHomePage(driver);
         registerPage = homePage.clickOnSignupButton();
         registerPage.inputFirstName(dataHelper.getFirstName());

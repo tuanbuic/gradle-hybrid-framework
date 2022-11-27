@@ -7,9 +7,7 @@ import exception.BrowserNotSupport;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import pageObjects.norCommercePortal.UserHomePageObject;
 import pageObjects.norCommercePortal.UserLoginPageObject;
 import pageObjects.norCommercePortal.UserRegisterPageObject;
@@ -28,15 +26,14 @@ public class Common01_Register_Cookie extends BaseTest {
     public static Set<Cookie> loggedCookie;
 
 
-    @BeforeTest
-    @Parameters({"browser", "environment"})
-    public void Register(String browserName, String environment) throws BrowserNotSupport {
+    @Parameters({"envName", "servername", "browser", "ipAddress", "portNumber", "osName", "osVersion"})
+    @BeforeClass
+    public void beforeClass(@Optional("Local") String envName, @Optional("chrome") String browserName, @Optional("dev") String serverName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber, @Optional("Window") String osName, @Optional("10") String osVersion) throws Exception {
+        driver = getBrowserDriver(envName, browserName, serverName, ipAddress, portNumber, osName, osVersion);
         emailAddress = generatefakeEmailAddress("kevinbui", "yopmail.com");
         firstName = "Automation";
         lastName = "FC";
         password = "123456";
-        driver = getBrowserDriver(browserName);
-        driver.get(getEnvironmentURL(environment));
         homePage = PageGeneratorManager.getUserHomePage(driver);
         registerPage = homePage.clickOnSignupButton();
         registerPage.inputFirstName(firstName);

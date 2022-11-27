@@ -5,10 +5,7 @@ import common.PageGeneratorManager;
 import exception.BrowserNotSupport;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageObjects.norCommercePortal.*;
 
 import java.util.Random;
@@ -29,11 +26,10 @@ public class Level15_Attach_Screenshot extends BaseTest {
     static String adminEmailAddress;
     String adminPassword;
 
-    @Parameters({"browser", "environment"})
+    @Parameters({"envName", "servername", "browser", "ipAddress", "portNumber", "osName", "osVersion"})
     @BeforeClass
-    public void beforeClass(String browserName, String environment) throws BrowserNotSupport {
-        driver = getBrowserDriver(browserName);
-        driver.get(getEnvironmentURL(environment));
+    public void beforeClass(@Optional("Local") String envName, @Optional("chrome") String browserName, @Optional("dev") String serverName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber, @Optional("Window") String osName, @Optional("10") String osVersion) throws Exception {
+        driver = getBrowserDriver(envName, browserName, serverName, ipAddress, portNumber, osName, osVersion);
 
         emailAddress = generatefakeEmailAddress("kevinbui", "yopmail.com");
         firstName = "Automation";
