@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="NopCommerce">
+<suite name="NopCommerce" parallel="tests" thread-count="2">
     <listeners>
         <listener class-name="listenerConfig.MethodListener"></listener>
-<!--        <listener class-name="actions.listenerConfig.ExtentTestListener"></listener>-->
+        <!--        <listener class-name="actions.listenerConfig.ExtentTestListener"></listener>-->
         <listener class-name="listenerConfig.AllureTestListener"></listener>
 
         <!--        <listener class-name="actions.reportConfig.ReportNG"></listener>-->
@@ -13,23 +13,30 @@
         <!--        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener>-->
         <!--        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener>-->
     </listeners>
-    <parameter name="envName" value="local"></parameter>
-    <parameter name="serverName" value="dev"></parameter>
-    <!--    <test name="Run on firefox">-->
-    <!--        <parameter name="browser" value="firefox"></parameter>-->
-    <!--        <classes>-->
-    <!--            <class name="testcases.com.nopcommerce.user.Level4_Multiple_Browser"/>-->
-    <!--        </classes>-->
-    <!--    </test>-->
 
-    <test name="Run on Chrome">
-<!--        <parameter name="browser" value="chrome"></parameter>-->
+    <parameter name="envName" value="grid"></parameter>
+    <parameter name="serverName" value="dev"></parameter>
+
+
+    <test name="Run on Chrome 1">
+        <parameter name="browser" value="chrome"></parameter>
+        <parameter name="ipAddress" value="localhost"></parameter>
+        <parameter name="portNumber" value="4444"></parameter>
         <classes>
-<!--            <class name="testcases.com.common.Common01_Register_Cookie"/>-->
-            <class name="testcases.user.Level16_Shared_Data"/>
+            <!--            <class name="testcases.com.common.Common01_Register_Cookie"/>-->
+            <class name="testcases.user.Level4_Multiple_Browser"/>
         </classes>
     </test>
 
+        <test name="Run on firefox 1">
+            <parameter name="browser" value="firefox"></parameter>
+            <parameter name="ipAddress" value="localhost"></parameter>
+            <parameter name="portNumber" value="4444"></parameter>
+            <classes>
+                <!--            <class name="testcases.com.common.Common01_Register_Cookie"/>-->
+                <class name="testcases.user.Level4_Multiple_Browser"/>
+            </classes>
+        </test>
     <!--    <test name="Run on Edge">-->
     <!--        <parameter name="browser" value="edge"></parameter>-->
     <!--        <classes>-->

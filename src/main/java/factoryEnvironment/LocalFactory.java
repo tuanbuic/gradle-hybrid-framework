@@ -5,6 +5,7 @@ import exception.BrowserNotSupport;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -27,7 +28,8 @@ public class LocalFactory {
             options.addArguments("window-size=1920x1080");
             driver = WebDriverManager.chromedriver().capabilities(options).create();
         } else if (browser == BrowserList.FIREFOX) {
-            driver = WebDriverManager.firefoxdriver().create();
+            driver = WebDriverManager.firefoxdriver().driverVersion("0.21.0").create();
+//            driver = WebDriverManager.firefoxdriver().create();
         } else if (browser == BrowserList.H_FIREFOX) {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("-headless");

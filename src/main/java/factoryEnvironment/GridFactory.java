@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class GridFactory {
-    private WebDriver driver;
+    private RemoteWebDriver driver;
     private String ipAddress;
     private String portNumber;
     private String browserName;
@@ -32,33 +32,29 @@ public class GridFactory {
         DesiredCapabilities capability = null;
 
         if (browser == BrowserList.CHROME) {
-            WebDriverManager.chromedriver().setup();
             capability = DesiredCapabilities.chrome();
             capability.setBrowserName("chrome");
-            capability.setPlatform(Platform.WINDOWS);
+            capability.setPlatform(Platform.ANY);
             ChromeOptions options = new ChromeOptions();
             options.merge(capability);
         } else if (browser == BrowserList.H_CHROME) {
-            WebDriverManager.chromedriver().setup();
             capability = DesiredCapabilities.chrome();
             capability.setBrowserName("chrome");
-            capability.setPlatform(Platform.WINDOWS);
+            capability.setPlatform(Platform.ANY);
             ChromeOptions options = new ChromeOptions();
             options.addArguments("-headless");
             options.addArguments("window-size=1920x1080");
             options.merge(capability);
         } else if (browser == BrowserList.FIREFOX) {
-            WebDriverManager.firefoxdriver().setup();
             capability = DesiredCapabilities.firefox();
-            capability.setBrowserName("chrome");
-            capability.setPlatform(Platform.WINDOWS);
+            capability.setBrowserName("firefox");
+            capability.setPlatform(Platform.ANY);;
             FirefoxOptions options = new FirefoxOptions();
             options.merge(capability);
         } else if (browser == BrowserList.H_FIREFOX) {
-            WebDriverManager.firefoxdriver().setup();
             capability = DesiredCapabilities.firefox();
-            capability.setBrowserName("chrome");
-            capability.setPlatform(Platform.WINDOWS);
+            capability.setBrowserName("firefox");
+            capability.setPlatform(Platform.ANY);
             FirefoxOptions options = new FirefoxOptions();
             options.addArguments("-headless");
             options.addArguments("window-size=1920x1080");

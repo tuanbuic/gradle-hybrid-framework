@@ -58,6 +58,7 @@ public class BaseTest {
         switch (envName) {
             case "grid":
                 driver = new GridFactory(ipAddress,portNumber,browserName).createDriver();
+                break;
             case "browserStack":
                 driver = new BrowserStackFactory(browserName,osName,osVersion).createDriver();
                 break;
@@ -87,6 +88,7 @@ public class BaseTest {
                 break;
             default:
                 log.error("Wrong environment");
+                break;
         }
         return url;
     }

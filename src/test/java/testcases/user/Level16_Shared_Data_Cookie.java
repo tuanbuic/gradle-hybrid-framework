@@ -18,7 +18,7 @@ public class Level16_Shared_Data_Cookie extends BaseTest {
     private UserHomePageObject homePage;
     private UserLoginPageObject loginPage;
 
-    @Parameters({"envName", "servername", "browser", "ipAddress", "portNumber", "osName", "osVersion"})
+    @Parameters({"envName", "serveName", "browser", "ipAddress", "portNumber", "osName", "osVersion"})
     @BeforeClass
     public void beforeClass(@Optional("Local") String envName, @Optional("chrome") String browserName, @Optional("dev") String serverName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber, @Optional("Window") String osName, @Optional("10") String osVersion) throws Exception {
         driver = getBrowserDriver(envName, browserName, serverName, ipAddress, portNumber, osName, osVersion);
