@@ -17,8 +17,8 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class BasePage {
-    private long longTimeout = GlobalConstants.LONG_TIMEOUT;
-    private long shortTimeout = GlobalConstants.SHORT_TIMEOUT;
+    private long longTimeout = GlobalConstants.getGlobalConstants().getLongTimeout();
+    private long shortTimeout = GlobalConstants.getGlobalConstants().getShortTimeout();
 
     public static BasePage getBasePageObject() {
         return new BasePage();
@@ -545,7 +545,7 @@ public class BasePage {
 
     private String getDynamicXpath(String locatorType, String... values) {
         if (locatorType.startsWith("xpath=") || locatorType.startsWith("XPATH=") || locatorType.startsWith("Xpath=")) {
-            locatorType = String.format(locatorType, values);
+            locatorType = String.format(locatorType, (Object) values);
         }
         return locatorType;
     }
@@ -633,7 +633,7 @@ public class BasePage {
     }
 
     public void uploadMultipleFiles(WebDriver driver, String... fileNames) {
-        String filepath = GlobalConstants.UPLOAD_FILE_FOLDER;
+        String filepath = GlobalConstants.getGlobalConstants().getUploadFileFolder();
         String fullFileName = "";
         for (String file : fileNames) {
             fullFileName = fullFileName + filepath + file + "\n";

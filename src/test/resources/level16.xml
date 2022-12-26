@@ -14,14 +14,14 @@
         <!--        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener>-->
     </listeners>
 
-    <parameter name="envName" value="grid"></parameter>
+    <parameter name="envName" value="local"></parameter>
     <parameter name="serverName" value="dev"></parameter>
 
 
     <test name="Run on Chrome 1">
         <parameter name="browser" value="chrome"></parameter>
-        <parameter name="ipAddress" value="localhost"></parameter>
-        <parameter name="portNumber" value="4444"></parameter>
+<!--        <parameter name="ipAddress" value="localhost"></parameter>-->
+<!--        <parameter name="portNumber" value="4444"></parameter>-->
         <classes>
             <!--            <class name="testcases.com.common.Common01_Register_Cookie"/>-->
             <class name="testcases.user.Level4_Multiple_Browser"/>
@@ -30,8 +30,8 @@
 
         <test name="Run on firefox 1">
             <parameter name="browser" value="firefox"></parameter>
-            <parameter name="ipAddress" value="localhost"></parameter>
-            <parameter name="portNumber" value="4444"></parameter>
+<!--            <parameter name="ipAddress" value="localhost"></parameter>-->
+<!--            <parameter name="portNumber" value="4444"></parameter>-->
             <classes>
                 <!--            <class name="testcases.com.common.Common01_Register_Cookie"/>-->
                 <class name="testcases.user.Level4_Multiple_Browser"/>

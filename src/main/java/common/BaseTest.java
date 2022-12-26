@@ -1,28 +1,17 @@
 package common;
 
-import exception.BrowserNotSupport;
 import factoryEnvironment.*;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Time;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -31,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 import static factoryEnvironment.EnvironmentList.*;
 
 public class BaseTest {
-    private WebDriver driver;
+    protected static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
     protected final Log log;
 
     String projectPath = System.getProperty("user.dir");
@@ -45,35 +34,27 @@ public class BaseTest {
         log = LogFactory.getLog(getClass());
     }
 
-    public int generateFakeNumber() {
-        Random rnd = new Random();
-        return rnd.nextInt(9999);
-    }
-
-    public String generatefakeEmailAddress(String emailprefix, String webmail) {
-        return emailprefix + generateFakeNumber() + "@" + webmail;
-    }
 
     protected WebDriver getBrowserDriver(String envName,String browserName, String serverName,  String ipAddress, String portNumber,String osName,String osVersion) throws Exception {
         switch (envName) {
             case "grid":
-                driver = new GridFactory(ipAddress,portNumber,browserName).createDriver();
+                driver.set(new GridFactory(ipAddress,portNumber,browserName).createDriver());
                 break;
             case "browserStack":
-                driver = new BrowserStackFactory(browserName,osName,osVersion).createDriver();
+                driver.set(new BrowserStackFactory(browserName,osName,osVersion).createDriver());
                 break;
             case "saucelab":
-                driver = new SauceLabFactory(browserName,osName).createDriver();
+                driver.set(new SauceLabFactory(browserName,osName).createDriver());
                 break;
             case "local":
             default:
-                driver = new LocalFactory(browserName).createDriver();
+                driver.set(new LocalFactory(browserName).createDriver());
                 break;
         }
-        driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get(getEnvironmentURL(serverName));
-        return driver;
+        driver.get().manage().timeouts().implicitlyWait(GlobalConstants.getGlobalConstants().getLongTimeout(), TimeUnit.SECONDS);
+        driver.get().manage().window().maximize();
+        driver.get().get(getEnvironmentURL(serverName));
+        return driver.get();
     }
 
     protected String getEnvironmentURL(String environmentName) {
@@ -91,6 +72,15 @@ public class BaseTest {
                 break;
         }
         return url;
+    }
+
+    public int generateFakeNumber() {
+        Random rnd = new Random();
+        return rnd.nextInt(9999);
+    }
+
+    public String generatefakeEmailAddress(String emailprefix, String webmail) {
+        return emailprefix + generateFakeNumber() + "@" + webmail;
     }
 
     protected boolean verifyTrue(boolean condition) {
@@ -140,12 +130,12 @@ public class BaseTest {
     }
 
     public WebDriver getDriver() {
-        return this.driver;
+        return this.driver.get();
     }
 
     public void deleteAllureReport() {
         try {
-            String pathFolderDownload = GlobalConstants.PROJECT_PATH + "/allure-json";
+            String pathFolderDownload = GlobalConstants.getGlobalConstants().getProjectPath() + "/allure-json";
             File file = new File(pathFolderDownload);
             File[] listOfFiles = file.listFiles();
             for (int i = 0; i < listOfFiles.length; i++) {
@@ -163,7 +153,7 @@ public class BaseTest {
             String osName = System.getProperty("os.name").toLowerCase();
             log.info("OS name = " + osName);
 
-            String driverInstanceName = driver.toString().toLowerCase();
+            String driverInstanceName = driver.get().toString().toLowerCase();
             log.info("Driver instance name = " + driverInstanceName);
 
             if (driverInstanceName.contains("chrome")) {
@@ -201,8 +191,9 @@ public class BaseTest {
             }
 
             if (driver != null) {
-                driver.manage().deleteAllCookies();
-                driver.quit();
+                driver.get().manage().deleteAllCookies();
+                driver.get().quit();
+                driver.remove();
             }
         } catch (Exception e) {
             log.info(e.getMessage());

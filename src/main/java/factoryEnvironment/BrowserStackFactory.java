@@ -1,12 +1,7 @@
 package factoryEnvironment;
 
 import common.GlobalConstants;
-import exception.BrowserNotSupport;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -36,8 +31,8 @@ public class BrowserStackFactory {
         capability.setCapability("browserstack.debug", "true");
         capability.setCapability("name", "Run on " + osName + " and" + browserName);
 
-        driver = new RemoteWebDriver(new URL(GlobalConstants.BROWSER_STACK_URL), capability);
-        driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
+        driver = new RemoteWebDriver(new URL(GlobalConstants.getGlobalConstants().getBrowserStackUrl()), capability);
+        driver.manage().timeouts().implicitlyWait(GlobalConstants.getGlobalConstants().getLongTimeout(), TimeUnit.SECONDS);
         driver.manage().window().maximize();
         return driver;
     }

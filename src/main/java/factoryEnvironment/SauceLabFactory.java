@@ -37,8 +37,8 @@ public class SauceLabFactory {
 
 
         capability.setCapability("sauce:options", sauceOptions);
-        driver = new RemoteWebDriver(new URL(GlobalConstants.BROWSER_STACK_URL), capability);
-        driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
+        driver = new RemoteWebDriver(new URL(GlobalConstants.getGlobalConstants().getBrowserStackUrl()), capability);
+        driver.manage().timeouts().implicitlyWait(GlobalConstants.getGlobalConstants().getLongTimeout(), TimeUnit.SECONDS);
         driver.manage().window().maximize();
         return driver;
 

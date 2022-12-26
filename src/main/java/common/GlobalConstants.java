@@ -1,38 +1,50 @@
 package common;
 
+import lombok.Getter;
+
 import java.io.File;
-
+@Getter
 public class GlobalConstants {
-    public static final String PORTAL_PAGE_URL = "https://demo.nopcommerce.com/";
-    public static final String ADMIN_PAGE_URL = "https://admin-demo.nopcommerce.com";
-    public static final String PROJECT_PATH = System.getProperty("user.dir");
-    public static final String OS_NAME = System.getProperty("os.name");
 
-    public static final String BROWSER_USERNAME = System.getProperty("os.name");
-    public static final String BROWSER_AUTOMATEKEY = System.getProperty("os.name");
-    public static final String BROWSER_STACK_URL ="https://"+ BROWSER_USERNAME+":"+BROWSER_AUTOMATEKEY+"hub-cloud.browserstack.com/wd/hub";
+    private static GlobalConstants globalInstance;
+    private GlobalConstants(){}
+    public static synchronized GlobalConstants getGlobalConstants(){
+        if(globalInstance==null){
+            globalInstance = new GlobalConstants();
+        }
+        return globalInstance;
+    }
+    private final long shortTimeout = 5;
+
+    private final long longTimeout = 10;
+    private final String portalPageUrl = "https://demo.nopcommerce.com/";
+    private final String adminPageUrl = "https://admin-demo.nopcommerce.com";
+    private final String projectPath = System.getProperty("user.dir");
+    private final String osName = System.getProperty("os.name");
+
+    private final String browserName ="browserStackName";
+    private final String browserKey = "browserStackKey";
+    private final String browserStackUrl ="https://"+ browserName+":"+browserKey+"hub-cloud.browserstack.com/wd/hub";
 
 
 
     //window /mac/linux
-    public static final String UPLOAD_FILE_FOLDER = PROJECT_PATH + File.separator + "uploadFiles" + File.separator;
-    public static final String DOWNLOAD_FILE_FOLDER = PROJECT_PATH + File.separator + "downloadFiles";
-    public static final String BROWSER_LOG_FOLDER = PROJECT_PATH + File.separator + "browserLogs";
-    public static final String DRAG_DROP_HTML5 = PROJECT_PATH + File.separator + "dragdropHTML5";
-    public static final String AUTO_IT_SCRIPT = PROJECT_PATH + File.separator + "autoIT";
-    public static final String REPORTING_SCREENSHOT = PROJECT_PATH + File.separator + "ReportNGScreenShots" + File.separator;
+    private final String uploadFileFolder = projectPath + File.separator + "uploadFiles" + File.separator;
+    private final String downloadFileFolder = projectPath + File.separator + "downloadFiles";
+    private final String browserLogPath = projectPath + File.separator + "browserLogs";
+    private final String browserLogFolder = projectPath + File.separator + "browserLogs";
+    private final String dragDropHTML5 = projectPath + File.separator + "dragdropHTML5";
+    private final String autoITScript = projectPath + File.separator + "autoIT";
+    private final String ReportingScreenshot = projectPath + File.separator + "ReportNGScreenShots" + File.separator;
     //Database Account / User / Pass/ Port
-    public static final String DB_DEV_URL = "32.18.252.185:9860";
-    public static final String DB_DEV_USER = "automationfc";
-    public static final String DB_DEV_PASS = "P@ssw0rld1";
+    private final String dbDevUrl = "32.18.252.185:9860";
+    private final String dbDevUser = "automationfc";
+    private final String dbDevpass = "P@ssw0rld1";
 
-    public static final String DB_TEST_URL = "32.18.195.23:9860";
-    public static final String DB_TEST_USER = "automationfc";
-    public static final String DB_TEST_PASS = "P@ssw0rld1";
-    public static final long SHORT_TIMEOUT = 5;
-    public static final long LONG_TIMEOUT = 10;
-    public static final long RETRY_TEST_FAIL = 3;
-    public static final String EXTENT_PATH = "PROJECT_PATH" + File.separator + "extentV2" + File.separator;
 
-    public static final String JAVA_VERSION = System.getProperty("java.version");
+    private final long retryTestFail = 3;
+    private final String extendPath = "PROJECT_PATH" + File.separator + "extentV2" + File.separator;
+
+    private final String javaVersion = System.getProperty("java.version");
+
 }

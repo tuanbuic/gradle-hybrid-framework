@@ -47,7 +47,7 @@ public class Level8_Switch_Role extends BaseTest {
          adminPassword = "admin";
 
         driver.manage().window().maximize();
-        driver.get(GlobalConstants.PORTAL_PAGE_URL);
+        driver.get(GlobalConstants.getGlobalConstants().getPortalPageUrl());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class Level8_Switch_Role extends BaseTest {
 
     @Test
     public void TC_03_Admin() {
-        userHomePageObject.openPageUrl(driver, GlobalConstants.ADMIN_PAGE_URL);
+        userHomePageObject.openPageUrl(driver, GlobalConstants.getGlobalConstants().getAdminPageUrl());
         adminLoginPageObject = PageGeneratorManager.getAdminLoginPageObject(driver);
        adminDashboardPageObject = adminLoginPageObject.loginAsAdmin(adminEmailAddress,adminPassword);
 

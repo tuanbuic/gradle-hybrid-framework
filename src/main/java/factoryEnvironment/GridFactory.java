@@ -2,7 +2,7 @@ package factoryEnvironment;
 
 import common.GlobalConstants;
 import exception.BrowserNotSupport;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import factoryBrowser.BrowserList;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -63,7 +63,7 @@ public class GridFactory {
             throw new BrowserNotSupport(browserName);
         }
         driver = new RemoteWebDriver(new URL(String.format("http://%s:%s/wd/hub", ipAddress, portNumber)), capability);
-        driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(GlobalConstants.getGlobalConstants().getLongTimeout(), TimeUnit.SECONDS);
         driver.manage().window().maximize();
         return driver;
     }
